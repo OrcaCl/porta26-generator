@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${TITULO}</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/photoswipe@5/dist/photoswipe.css">
+</head>
+<body>
+  <header>
+    <h1>${TITULO}</h1>
+    <p class="fecha">Evento realizado el ${FECHA_FOTO}</p>
+  </header>
+
+  <main>
+    <div class="gallery" id="gallery">
+      ${GALERIA}
+    </div>
+  </main>
+
+  <script type="module">
+    import PhotoSwipeLightbox from 'https://unpkg.com/photoswipe@5/dist/photoswipe-lightbox.esm.js';
+    const lightbox = new PhotoSwipeLightbox({
+      gallery: '#gallery',
+      children: 'a',
+      pswpModule: () => import('https://unpkg.com/photoswipe@5/dist/photoswipe.esm.js')
+    });
+    lightbox.init();
+  </script>
+</body>
+</html>

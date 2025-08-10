@@ -1,0 +1,11 @@
+#Ignorar los archivos internos de la carpeta fotos (para que no se suban a github) y subcarpetas.
+#Autorizar la creación de la carpeta fotos, para referencia futura.
+#Agregar un archivo de relleno para que no me webee de que está vacía. .gitkeep
+
+fotos/**
+!fotos/
+!fotos/.gitkeep
+
+#No respaldes node_modules
+node_modules
+.vscode

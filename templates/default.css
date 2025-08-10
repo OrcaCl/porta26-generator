@@ -1,0 +1,43 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 1rem;
+}
+/* .gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
+}
+.gallery img {
+  width: 100%;
+  height: auto;
+  display: block;
+} */
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.gallery a {
+  flex: 1 1 calc(25% - 4px); /* 4 columnas, ajustable */
+  box-sizing: border-box;
+}
+
+.gallery a img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover; /* mantiene la proporción pero recorta si hace falta */
+}
+
+.gallery a img {
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.gallery a img:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+  cursor: pointer;
+}

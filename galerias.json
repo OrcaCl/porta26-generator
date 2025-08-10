@@ -1,0 +1,14 @@
+{
+  "galerias": [
+    {
+      "id": "ORCA-1",
+      "carpeta": "gothic-asylum-julio-2025",
+      "titulo": "Gothic Asylum Julio 2025",
+      "fecha_creacion": "2025-08-10T09:35:23.005Z",
+      "fecha_foto": "2025-08-10T09:35:12.909Z",
+      "ultima_modificacion": "2025-08-10T11:53:33.934Z",
+      "cantidad_fotos": 127,
+      "template": "default"
+    }
+  ]
+}
