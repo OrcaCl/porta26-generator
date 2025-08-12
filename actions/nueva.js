@@ -2,27 +2,12 @@ import fs from 'fs/promises';
 import path from 'path';
 import slugify from 'slugify';
 
-import { log, err, generateThumb, generateHtml, saveLog, getFirstPhotoDate, normalizeFilename } from './utils.js';
+import { log, loadLog, generarNuevoId, err, generateThumb, generateHtml, saveLog, getFirstPhotoDate, normalizeFilename } from './utils.js';
 
 const baseFotosDir = './fotos';
 const thumbDirName = 'thumbs';
 
-/**
- * Genera nuevo ID tipo ORCA-1, ORCA-2, etc. basado en log.json
- * @param {object} logData 
- * @returns {string}
- */
-function generarNuevoId(logData) {
-  const prefix = 'ORCA-';
-  const ids = logData.galerias
-    .map(g => g.id)
-    .filter(id => id.startsWith(prefix))
-    .map(id => parseInt(id.slice(prefix.length)))
-    .filter(num => !isNaN(num));
 
-  const maxNum = ids.length > 0 ? Math.max(...ids) : 0;
-  return `${prefix}${maxNum + 1}`;
-}
 
 /**
  * Crear nueva galería
@@ -40,6 +25,29 @@ export async function nueva(titulo, template = 'default') {
   const galeriaPath = path.join(baseFotosDir, carpetaSlug);
   const thumbsPath = path.join(galeriaPath, thumbDirName);
 
+  //Verifica que exista la carpeta de fotos antes de optimizar 
+  //Y que no le haya puesto mal el nombre porque se condorea.
+  try {
+    await fs.access(galeriaPath);
+  } catch {
+    err(`No existe una carpeta con el nombre "${carpetaSlug}" en el directorio "${baseFotosDir}/"`);
+    err(`Agüeboldo! Crea la carpeta a mano primero o verifica el nombre que le pusiste`);
+    process.exit(1);
+  }
+
+  // Cargar log para saber si ya existe la carpeta con ese slug, en el registro.
+  const logData = await loadLog();
+  const existeRegistro = logData.galerias.some(g => g.carpeta === carpetaSlug);
+
+  //si ya la agregué, me manda a la ...
+  if (existeRegistro) {
+    err(`Ya existe una galeria registrada con el nombre de "${carpetaSlug}"`);
+    process.exit();
+  }
+
+  // Generar ID ORCA-n
+  const nuevoId = generarNuevoId(logData);
+    
   try {
     await fs.mkdir(galeriaPath, { recursive: true });
     await fs.mkdir(thumbsPath, { recursive: true });
@@ -70,19 +78,14 @@ export async function nueva(titulo, template = 'default') {
     await generateThumb(path.join(galeriaPath, foto), path.join(thumbsPath, foto));
   }
 
-  // Cargar log
-  const logData = await import('./log.json', { assert: { type: 'json' } }).then(m => m.default || { galerias: [] });
-
-  // Generar ID ORCA-n
-  const nuevoId = generarNuevoId(logData);
 
   // Guardar en log, con carpetaSlug separado
   logData.galerias.push({
     id: nuevoId,
     carpeta: carpetaSlug,
+    titulo,
     fecha_creacion: new Date().toISOString(),
     fecha_foto: fechaFoto,
-    titulo,
     ultima_modificacion: new Date().toISOString(),
     cantidad_fotos: fotos.length,
     template

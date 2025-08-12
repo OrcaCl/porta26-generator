@@ -9,3 +9,6 @@ fotos/**
 #No respaldes node_modules
 node_modules
 .vscode
+
+#Cosas viejas pero que no quiero borrar
+generar-galeria-legacy.js

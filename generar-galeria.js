@@ -4,7 +4,7 @@ import { nueva } from './actions/nueva.js';
 import { regenerarThumbs } from './actions/regenerarThumbs.js';
 import { regenerarFotos } from './actions/regenerarFotos.js';
 import { cambiarTemplate } from './actions/cambiarTemplate.js';
-import { regenerarPlantilla } from './actions/regenerarPlantilla.js';
+import { regenerarTemplate } from './actions/regenerarTemplate.js';
 
 (async () => {
   const argv = yargs(hideBin(process.argv))
@@ -46,7 +46,7 @@ import { regenerarPlantilla } from './actions/regenerarPlantilla.js';
       case 'cambiar-template':
         await cambiarTemplate(argv.cual, argv.template);
         break;
-      case 'regenerar-plantilla':
+      case 'regenerar-template':
         await regenerarTemplate(argv.cual);
         break;
       default:

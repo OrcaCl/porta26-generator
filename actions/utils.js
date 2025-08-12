@@ -18,6 +18,7 @@ export async function loadLog() {
   }
 }
 
+
 //Actualizar y guardar el log de galerias
 export async function saveLog(log) {
   await fs.writeFile('./galerias.json', JSON.stringify(log, null, 2));
@@ -76,9 +77,9 @@ export async function generateHtml(galeriaPath, titulo, fechaFoto, fotos, templa
     const metadata = await sharp(path.join(galeriaPath, photoUrl)).metadata();
 
     galeriaHtml += `
-<a href="${photoUrl}" data-pswp-width="${metadata.width}" data-pswp-height="${metadata.height}" target="_blank" data-download-url="${photoUrl}">
-  <img src="${thumbUrl}" alt="${titulo} - Foto ${count}" loading="lazy" />
-</a>`;
+      <a href="${photoUrl}" data-pswp-width="${metadata.width}" data-pswp-height="${metadata.height}" target="_blank" data-download-url="${photoUrl}">
+        <img src="${thumbUrl}" alt="${titulo} - Foto ${count}" loading="lazy" />
+      </a>`;
     count++;
   }
 
@@ -130,4 +131,22 @@ export function normalizeFilename(filename) {
     .replace(/[^a-z0-9_]/g, ''); // elimina caracteres no permitidos
 
   return `${name}.${ext}`;
+}
+
+
+/**
+ * Genera nuevo ID tipo ORCA-1, ORCA-2, etc. basado en log.json
+ * @param {object} logData 
+ * @returns {string}
+ */
+export function generarNuevoId(logData) {
+  const prefix = 'ORCA-';
+  const ids = logData.galerias
+    .map(g => g.id)
+    .filter(id => id.startsWith(prefix))
+    .map(id => parseInt(id.slice(prefix.length)))
+    .filter(num => !isNaN(num));
+
+  const maxNum = ids.length > 0 ? Math.max(...ids) : 0;
+  return `${prefix}${maxNum + 1}`;
 }

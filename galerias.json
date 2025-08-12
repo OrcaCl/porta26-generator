@@ -9,6 +9,16 @@
       "ultima_modificacion": "2025-08-10T11:53:33.934Z",
       "cantidad_fotos": 127,
       "template": "default"
+    },
+    {
+      "id": "ORCA-2",
+      "carpeta": "unterhaus-agosto-2025",
+      "titulo": "Unterhaus Agosto 2025",
+      "fecha_creacion": "2025-08-12T06:07:51.748Z",
+      "fecha_foto": "2025-08-11T07:48:34.496Z",
+      "ultima_modificacion": "2025-08-12T06:11:14.438Z",
+      "cantidad_fotos": 58,
+      "template": "default"
     }
   ]
 }

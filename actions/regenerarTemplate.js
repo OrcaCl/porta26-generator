@@ -6,7 +6,7 @@ import { loadLog, saveLog, log, err, generateHtml } from './utils.js';
 
 const baseFotosDir = './fotos';
 
-export async function regenerar(cual) {
+export async function regenerarTemplate(cual) {
   const logData = await loadLog();
   const galeria = logData.galerias.find(g => g.id === cual);
   if (!galeria) {
