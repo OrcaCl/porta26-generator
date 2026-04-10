@@ -1,3 +1,16 @@
+# PROYECTO DESCONTINUADO 
+A fecha de 09-04-2026, este proyecto está aquí solo para fines históricos.
+
+El principal problema que tenía es que este script solo me servía para generar las estructuras, miniaturas y organización base de las galerías de fotos.
+Carecía de un control, administración, log, optimización para móviles, visualización y un enorme etcétera, al punto que yo mismo olvidé que lo tenía acá y partí de cero con un proyecto nuevo que tiene todo lo anterior, con los nuevos estándares web y combina ambas funcionalidades en un solo gran paquete.
+
+Pueden seguirlo acá:
+
+https://github.com/OrcaCl/generador-galerias-orca
+
+
+************************************
+
 # Generador de Galerías de Fotos
 
 Este proyecto permite crear y gestionar galerías de fotos estáticas, optimizando imágenes y generando plantillas HTML personalizables.
